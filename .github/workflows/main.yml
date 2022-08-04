@@ -13,6 +13,16 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+inputs:
+  path:
+    description: "Path of the directory containing the static assets."
+    required: true
+    default: "_site/"
+  retention-days:
+    description: "Duration after which artifact will expire in days."
+    required: false
+    default: "1"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -50,3 +60,33 @@ jobs:
       - name: Copy files to _site
         run: cp -r dist/ index.html _site/
 
+      - name: Archive artifact
+        shell: bash
+        if: runner.os != 'Windows'
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory ${{ inputs.path }} \
+            -cvf ${{ runner.temp }}/artifact.tar \
+            --exclude=.git \
+            --exclude=.github \
+            .
+      # Massage the paths for Windows only
+      - name: Archive artifact
+        shell: bash
+        if: runner.os == 'Windows'
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "${{ inputs.path }}" \
+            -cvf "${{ runner.temp }}\artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --force-local \
+            "."
+      - name: Upload artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: ${{ inputs.retention-days }}
