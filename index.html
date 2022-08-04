@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<title>GMRS & Amateur License Lookup</title>
+<script src="./dist/bundle.js"></script>
+<script>
+    function search(query) {
+      window.location.search = '?' + query;
+    }
+</script>
+<style>
+    .result {
+        padding: 1em
+    }
+    .callsign {
+        font-family: Arial;
+        font-size: larger;
+        color: rgb(9, 82, 239);
+    }
+    .name, .address, .service {
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: smaller
+    }
+</style>
+<body>
+    <form onsubmit="search(call_search.value)" action="javascript:void(0);">
+        <label for="call_search">Search:</form>
+        <input type="search" id="call_search" name="call_search" 
+          onchange="search(call_search.value)" pattern="[A-Za-z0-9]{1,7}" title="Call Sign">
+	<input type="submit" value="Submit">
+    </form>
+    <div id=results></div>
+    <div id=about>Search for amateur or GMRS call signs. Learn if licensee also has the other type of license.</div>
+</body>

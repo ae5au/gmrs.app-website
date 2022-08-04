@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "sql.js-httpvfs": "^0.8.11"
+  }
+}

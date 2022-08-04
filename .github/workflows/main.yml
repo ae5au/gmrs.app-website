@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # push:
+    # branches: [ "main" ]
+  # pull_request:
+    # branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.4.1
+        with:
+          # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
+          node-version: ">=16.16.0"
+          # Used to specify a package manager for caching in the default directory. Supported values: npm, yarn, pnpm.
+          cache: npm
+          # Used to specify the path to a dependency file: package-lock.json, yarn.lock, etc. Supports wildcards or a list of file names for caching multiple dependencies.
+          cache-dependency-path: package-lock.json
+
+      - name: Make data directory
+        run: mkdir data
+
+      - name: Run Python script to build database
+        run: python3 parse_data.py
+
+      - name: Make site directory
+        run: mkdir _site
+        
+      - name: Split DB
+        run: bash create_db.sh callsign.sqlite3 _site/
+
+      - name: Build site with webpack
+        run: |
+          npm install
+          node_modules/.bin/webpack --mode=production
+
+      - name: Copy files to _site
+        run: cp -r dist/ index.html _site/
+
