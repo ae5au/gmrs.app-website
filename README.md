@@ -32,4 +32,5 @@ The site is written in Node.js and packaged with webpack. This was my first expe
   * Create a 'data' directory and run parse_data.py
     * May require tweaking and moving the files around after it runs, but gives more control over the DB build process.
     * Pulls a single file that is more convenient if you want to manually query it with a SQLite client.
-    * create_db.sh can be used to break the DB file into chunks and create the JSON config file needed for sql.js-httpvfs to reference the DB. 
+    * create_db.sh can be used to break the DB file into chunks and create the JSON config file needed for sql.js-httpvfs to reference the DB.
+* [Spectre.css](https://github.com/picturepan2/spectre) framework used for UI. [Docs](https://picturepan2.github.io/spectre/getting-started.html)
