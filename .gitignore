@@ -2,7 +2,9 @@
 data/*.zip
 data/l_*
 *.sqlite3
+*.sqlite3.*
 *.db
+config.json
 
 # Node
 node_modules/*
