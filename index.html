@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GMRS & Amateur License Lookup</title>
+<meta name="description" content="Finding people licensed for both amateur (ham) radio and GMRS">
+<meta name="keywords" content="amateur, ham, gmrs, radio, license">
+<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
 <script src="./dist/bundle.js"></script>
 <script>
     function search(query) {
@@ -8,6 +15,21 @@
     }
 </script>
 <style>
+    /* Make the navbar taller, and high contrast. */
+    .navbar { height: 6rem; background-color: #222222; padding: .5em 0 1em; }
+    .navbar-primary .navbar-brand { 
+        color: #fff; 
+        font-size: 3rem; 
+        font-weight: bold; 
+        padding-left: 2rem;
+    }
+    .btn.btn-link { color: lightgray; background-color: #222222; font-size: 1.5em;}
+    /* Make the button link color lighter on the nav bar */		
+    .btn.btn-link.selected { color: white; background-color: #222222; font-size: 1.5em;}
+    
+    /* Add padding to the right side of navbar. */
+    .navbar-section { padding-right: 2rem;}
+
     .result {
         padding: 1em
     }
@@ -21,13 +43,35 @@
         font-size: smaller
     }
 </style>
+
 <body>
+    <!-- navbar -->
+	<header class="navbar">
+		<!-- Logo on the left -->
+		<div class="navbar-primary">	
+			<a href="#" class="navbar-brand mr-10">GMRS.app</a>
+        </div>
+		<section class="navbar-section">
+			<a href="https://github.com/ae5au/gmrs.app-website" class="btn btn-link">GitHub</a> 
+			<a href="#" class="btn btn-link">Contact</a> 
+        </section>
+
+	</header>
+    <p></p>
+    <div class="pt-2"></div>
+    <p></p>
+    <div class="form_group">
     <form onsubmit="search(call_search.value)" action="javascript:void(0);">
         <label for="call_search">Search:</form>
         <input type="search" id="call_search" name="call_search" 
           onchange="search(call_search.value)" pattern="[A-Za-z0-9]{1,7}" title="Call Sign">
 	<input type="submit" value="Submit">
-    </form>
+    </form></div>
     <div id=results></div>
-    <div id=about>Search for amateur or GMRS call signs. Learn if licensee also has the other type of license.</div>
+	<div class="container text-center">
+		<h1>Ever wondered if that ham is also on GMRS?</h1>
+		<p>What about if that GMRS user is also a ham?
+        Here's the tool for you. The Ham Radio & GMRS Licence Holder Lookup</p>
+	</div>
+    
 </body>
