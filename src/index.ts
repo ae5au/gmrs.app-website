@@ -34,23 +34,23 @@ async function load() {
             if(results) {
                 licenses.forEach(function(item : any){
                     var resultDiv = document.createElement('div');
-                    resultDiv.className = 'result'
+                    resultDiv.className = 'hero-sm bg-gray'
                     results.appendChild(resultDiv);
+                    
+                    var divider = document.createElement('div')
+                    divider.className = "divider text-center"
+                    resultDiv.appendChild(divider)
 
-                    var callDiv = document.createElement('div');
-                    callDiv.className = 'callsign'
-                    callDiv.textContent = item.callsign
-                    resultDiv.appendChild(callDiv);
+                    var callSpan = document.createElement('span');
+                    callSpan.className = 'h2'
+                    callSpan.id = 'callsign'
+                    callSpan.textContent = item.callsign
+                    resultDiv.appendChild(callSpan);
 
                     var nameDiv = document.createElement('div');
                     nameDiv.className = 'name'
                     nameDiv.textContent = item.name
                     resultDiv.appendChild(nameDiv);
-
-                    var addressDiv = document.createElement('div');
-                    addressDiv.className = 'address'
-                    addressDiv.textContent = item.street
-                    resultDiv.appendChild(addressDiv);
 
                     var cityDiv = document.createElement('div');
                     cityDiv.className = 'address'
