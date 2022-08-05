@@ -31,3 +31,5 @@ The site is written in Node.js and packaged with webpack. This was my first expe
   * Run ```python3 dev_data.py``` in the site directory. (Easiest and quickest! Pulls DB files from gmrs.app)
   * Create a 'data' directory and run parse_data.py
     * May require tweaking and moving the files around after it runs, but gives more control over the DB build process.
+    * Pulls a single file that is more convenient if you want to manually query it with a SQLite client.
+    * create_db.sh can be used to break the DB file into chunks and create the JSON config file needed for sql.js-httpvfs to reference the DB. 
