@@ -56,7 +56,9 @@
             <form onsubmit="search(call_search.value)" action="javascript:void(0);">
                 <div class="input-group has-icon-right">
                     <button class="btn btn-primary input-group-btn" onclick="search(call_search.value)">Search</button>
-                    <input type="text" class="form-input" id="call_search" name="call_search" placeholder="Call Sign" onClick="this.select();">
+                    <input type="text" class="form-input" id="call_search" 
+                        name="call_search" placeholder="Call Sign" onClick="this.select();"
+                        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
                     <i class="form-icon loading" id="call_search_icon"></i>
                 </div>
             </form>
