@@ -19,6 +19,47 @@ amat_AM = "./data/l_amat/AM.dat"
 
 DB_filepath = "callsign.sqlite3"
 
+street_replacement = {
+    "." : "",
+    "," : "",
+    ";" : "",
+    "-" : "",
+    " Alley" : " Aly",
+    " Avenue" : " Ave",
+    " Boulevard" : " Blvd",
+    " Causeway" : " Cswy",
+    " Center" : " Ctr",
+    " Circle" : " Cir",
+    " Court" : " Ct",
+    " Cove" : " Cv",
+    " Crossing" : " Xing",
+    " Drive" : " Dr",
+    " Expressway" : " Expy",
+    " Extension" : " Ext",
+    " Freeway" : " Fwy",
+    " Grove" : " Grv",
+    " Highway" : " Hwy",
+    " Hollow" : " Holw",
+    " Junction" : " Jct",
+    " Lane" : " Ln",
+    " Motorway" : " Mtwy",
+    " Overpass" : " Opas",
+    " Park" : " Park",
+    " Parkway" : " Pkwy",
+    " Place" : " Pl",
+    " Plaza" : " Plz",
+    " Point" : " Pt",
+    " Road" : " Rd",
+    " Route" : " Rte",
+    " Skyway" : " Skwy",
+    " Square" : " Sq",
+    " Street" : " St",
+    " Terrace" : " Ter",
+    " Trail" : " Trl",
+    " Way" : " Way",
+    " " : ""
+}
+
 print("Downloading GMRS ZIP from FCC")
 urllib.request.urlretrieve(gmrs_URL, gmrs_ZIP)
 print("Downloading amateur ZIP from FCC")
@@ -63,7 +104,13 @@ with open(gmrs_EN, "r") as csvfile:
     bad_lines = 0
     for row in csv.reader(csvfile, dialect='piper'):
         if len(row) == 30 and row[0] == "EN":
-            cur.execute("INSERT INTO en VALUES (?, ?, ?, ?, ?, ?, ?)", (row[1], row[7], row[15], row[16], row[17], row[18], row[22]))
+            street = row[15]
+            if(street == '' or street == ' '):
+                street = row[19]
+            street = street.title()
+            for full, abbr in street_replacement.items():
+                street = street.replace(full, abbr)
+            cur.execute("INSERT INTO en VALUES (?, ?, ?, ?, ?, ?, ?)", (row[1], row[7], street, row[16].title(), row[17].upper(), row[18][:5], row[22]))
             good_lines += 1
         else:
             bad_lines += 1
@@ -88,7 +135,13 @@ with open(amat_EN, "r") as csvfile:
     bad_lines = 0
     for row in csv.reader(csvfile, dialect='piper'):
         if len(row) == 30 and row[0] == "EN":
-            cur.execute("INSERT INTO en VALUES (?, ?, ?, ?, ?, ?, ?)", (row[1], row[7], row[15], row[16], row[17], row[18], row[22]))
+            street = row[15]
+            if(street == '' or street == ' '):
+                street = row[19]
+            street = street.title()
+            for full, abbr in street_replacement.items():
+                street = street.replace(full, abbr)
+            cur.execute("INSERT INTO en VALUES (?, ?, ?, ?, ?, ?, ?)", (row[1], row[7], street, row[16].title(), row[17].upper(), row[18][:5], row[22]))
             good_lines += 1
         else:
             bad_lines += 1
@@ -123,6 +176,7 @@ con = sqlite3.connect(DB_filepath)
 print("  Building indices")
 con.execute("CREATE INDEX callsign ON licenses (callsign);").fetchall()
 con.execute("CREATE INDEX frn ON licenses (frn);").fetchall()
+con.execute("CREATE INDEX street_search ON licenses (street,city,state);").fetchall()
 con.execute("pragma journal_mode = delete;").fetchall()
 con.execute("pragma page_size = 1024;").fetchall()
 

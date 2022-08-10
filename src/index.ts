@@ -72,6 +72,61 @@ async function load() {
           })
         }
       }
+      if(licenses.length > 0) {
+        const street = licenses[0].street
+        const city = licenses[0].city
+        const state = licenses[0].state
+        console.log("Looking for alternates", street,city,state)
+        //const possible_licenses = await worker.db.query(`select * from licenses WHERE street = ? AND city = ? AND state = ?`, [street],[city],[state]);
+        // Not sure why multiple parameters aren't working
+        const possible_licenses = await worker.db.query(`select * from licenses WHERE street = '${street}' AND city = '${city}' AND state = '${state}' AND frn != '${frn}'`);
+        console.log(JSON.stringify(possible_licenses, null, 2))
+
+        if(possible_licenses.length > 0){
+
+          const results = document.getElementById("results")
+          if(results) {
+
+            var divider = document.createElement('div');
+            divider.className = 'divider text-center'
+            divider.setAttribute('data-content','POSSIBLE MATCHES');
+            results.appendChild(divider);
+
+            possible_licenses.forEach(function(item : any){
+              var resultDiv = document.createElement('div');
+              resultDiv.className = 'hero-sm bg-gray'
+              results.appendChild(resultDiv);
+              
+              var divider = document.createElement('div')
+              divider.className = "divider text-center"
+              resultDiv.appendChild(divider)
+
+              var callSpan = document.createElement('span');
+              callSpan.className = 'h2'
+              callSpan.id = 'callsign'
+              callSpan.textContent = item.callsign
+              resultDiv.appendChild(callSpan);
+              
+              var nameDiv = document.createElement('div');
+              nameDiv.className = 'name'
+              nameDiv.textContent = item.name
+              resultDiv.appendChild(nameDiv);
+
+              var cityDiv = document.createElement('div');
+              cityDiv.className = 'address'
+              cityDiv.textContent += item.city + ', ' + item.state + ' ' + item.zip
+              resultDiv.appendChild(cityDiv);
+              
+              var serviceDiv = document.createElement('div');
+              serviceDiv.className = 'service'
+              serviceDiv.textContent += item.service
+              if(item.class){serviceDiv.textContent += ' ' + item.class}
+              if(item.prevcall){serviceDiv.textContent += ' ' + item.prevcall}
+              resultDiv.appendChild(serviceDiv);
+            })
+          }
+        }
+      }
     } else {
       const results = document.getElementById("results")
       if(results){results.textContent = "No license found.";}
