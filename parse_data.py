@@ -176,6 +176,7 @@ con = sqlite3.connect(DB_filepath)
 print("  Building indices")
 con.execute("CREATE INDEX callsign ON licenses (callsign);").fetchall()
 con.execute("CREATE INDEX frn ON licenses (frn);").fetchall()
+con.execute("CREATE INDEX street_search ON licenses (street,city,state);").fetchall()
 con.execute("pragma journal_mode = delete;").fetchall()
 con.execute("pragma page_size = 1024;").fetchall()
 
