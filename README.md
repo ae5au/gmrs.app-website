@@ -4,10 +4,12 @@ Lookup for amateur and GMRS radio licensees.  Cross-referencing for those that h
 ## Premise
 Many GMRS radio operators are also licensed amateur radio operators. If you know an operator's call sign for one service, this app helps find the record for the other service. Even if the operator isn't licensed on the other service, you can lookup their details.
 
-Note that the match is based on the FRN (FCC registration number). A few things to remember:
+Match is first checked based on the FRN (FCC registration number). A few things to remember:
 * GMRS licenses can be shared by a whole family. The app will match to the holder of the GMRS license, but that might not be the person legitimately using the call sign.
 * Some people have different FRNs for each license. The app doesn't try to match on name, address, or anything other than FRN.
   * This isn't how the FCC indends things to be, but it happens. I don't know how much.
+
+"Possible matches" are licenses with a different FRN but a matching street, city, and state. Some normalization is done to try to match cases such as where one address spells out "Street" and another uses abbreviated "St.", but there are plenty of cases that would not match. Don't fully trust this section to show all possible results.
 
 A scheduled workflow downloads the data weekly when the [FCC publishes new full files](https://www.fcc.gov/uls/transactions/daily-weekly). Currently that is scheduled for 0700 UTC on Monday morning.
 
