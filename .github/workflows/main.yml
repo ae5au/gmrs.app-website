@@ -52,7 +52,7 @@ jobs:
           node_modules/.bin/webpack --mode=production
 
       - name: Copy files to _site
-        run: cp -r dist/ index.html _site/
+        run: cp -r dist/ index.html _site/ .well-known/
 
       - name: Archive artifact
         shell: bash

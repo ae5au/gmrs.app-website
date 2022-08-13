@@ -29,7 +29,7 @@ async function load() {
     console.log("Callsign:",callsign)
     if(search_box){search_box.value = callsign}
 
-    const frnlookup : any  = await worker.db.query(`select frn from licenses WHERE callsign = ?`, [callsign]);
+    const frnlookup : any  = await worker.db.query(`select frn from licenses WHERE callsign = ? OR prevcall = ? LIMIT 1`, [callsign,callsign]);
     if(frnlookup.length > 0){
       const frn = frnlookup[0]['frn']
       console.log("FRN: ", frn)
@@ -77,9 +77,7 @@ async function load() {
         const city = licenses[0].city
         const state = licenses[0].state
         console.log("Looking for alternates", street,city,state)
-        //const possible_licenses = await worker.db.query(`select * from licenses WHERE street = ? AND city = ? AND state = ?`, [street],[city],[state]);
-        // Not sure why multiple parameters aren't working
-        const possible_licenses = await worker.db.query(`select * from licenses WHERE street = '${street}' AND city = '${city}' AND state = '${state}' AND frn != '${frn}'`);
+        const possible_licenses = await worker.db.query(`select * from licenses WHERE street = ? AND city = ? AND state = ? AND frn != ?`, [street,city,state,frn]);
         console.log(JSON.stringify(possible_licenses, null, 2))
 
         if(possible_licenses.length > 0){
