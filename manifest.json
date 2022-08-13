@@ -1,0 +1,15 @@
+{
+  "short_name": "GMRS.app",
+  "name": "GMRS.app: GMRS & Amateur License Lookup",
+  "description": "GMRS & Amateur License Lookup",
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
