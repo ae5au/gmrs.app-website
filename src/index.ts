@@ -43,9 +43,9 @@ async function load() {
             resultDiv.className = 'hero-sm bg-gray'
             results.appendChild(resultDiv);
             
-            var divider = document.createElement('div')
-            divider.className = "divider text-center"
-            resultDiv.appendChild(divider)
+            // var divider = document.createElement('div')
+            // divider.className = "divider text-center"
+            // resultDiv.appendChild(divider)
 
             var callSpan = document.createElement('span');
             callSpan.className = 'h2'
@@ -95,9 +95,9 @@ async function load() {
               resultDiv.className = 'hero-sm bg-gray'
               results.appendChild(resultDiv);
               
-              var divider = document.createElement('div')
-              divider.className = "divider text-center"
-              resultDiv.appendChild(divider)
+              // var divider = document.createElement('div')
+              // divider.className = "divider text-center"
+              // resultDiv.appendChild(divider)
 
               var callSpan = document.createElement('span');
               callSpan.className = 'h2'
