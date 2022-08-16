@@ -35,4 +35,5 @@ The site is written in Node.js and packaged with webpack. This was my first expe
     * May require tweaking and moving the files around after it runs, but gives more control over the DB build process.
     * Pulls a single file that is more convenient if you want to manually query it with a SQLite client.
     * create_db.sh can be used to break the DB file into chunks and create the JSON config file needed for sql.js-httpvfs to reference the DB.
-* [Spectre.css](https://github.com/picturepan2/spectre) framework used for UI. [Docs](https://picturepan2.github.io/spectre/getting-started.html)
+* [Spectre.css](https://github.com/angular-package/spectre.css/) framework used for UI. [Docs](https://angular-package.github.io/spectre.css/getting-started.html)
+  * Original project has gone stale. We've moved to a fork that is under active development but the document hasn't completely caught up yet. Be watchful for links in docs pointing back to original project.
