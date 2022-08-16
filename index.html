@@ -31,11 +31,15 @@
     /* Add padding to the right side of navbar. */
     .navbar-section { padding-right: 2rem;}
 
-    .hero-sm {
-        margin: 0.5em; padding-left: 1em; padding-bottom: 0.5em;
+    .card {
+        margin: 0.5em; 
         border-color:#DDDDDD; border-style:solid; border-width: 0.1em; border-radius: 0.5em;
+        background-color: #f7f8f9;
     }
-
+    .card.card-shadow {border-color:#DDDDDD; border-style:solid; border-width: 0.1em;}
+    .card .card-header, .card .card-header .card-subtitle, .card .card-body, .card .card-footer {
+        padding-top: 0;
+    }
 </style>
 
 <body>
@@ -54,7 +58,7 @@
     <p></p>
 <!--    <div class="pt-2"></div> -->
     <!--<p></p>-->
-	<div class="container grid-sm">
+	<div class="container grid-md">
         <div class="form_group">
             <form onsubmit="search(call_search.value)" action="javascript:void(0);">
                 <div class="input-group has-icon-right">
