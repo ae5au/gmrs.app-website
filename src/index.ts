@@ -38,37 +38,40 @@ async function load() {
       if(licenses.length > 0){
         const results = document.getElementById("results")
         if(results) {
+
+          const columns = document.createElement('div')
+          columns.className = 'columns';
+          results.appendChild(columns);
+          
           licenses.forEach(function(item : any){
-            var resultDiv = document.createElement('div');
-            resultDiv.className = 'hero-sm bg-gray'
-            results.appendChild(resultDiv);
+            var column = document.createElement('div');
+            column.className = 'column col-6 col-sm-12';
+            columns.appendChild(column);
             
-            // var divider = document.createElement('div')
-            // divider.className = "divider text-center"
-            // resultDiv.appendChild(divider)
+            var card = document.createElement('div');
+            card.className = 'card card-shadow';
+            column.appendChild(card);
 
-            var callSpan = document.createElement('span');
-            callSpan.className = 'h2'
-            callSpan.id = 'callsign'
-            callSpan.textContent = item.callsign
-            resultDiv.appendChild(callSpan);
+            var cardHeader = document.createElement('div');
+            cardHeader.className = 'card-header';
+            card.appendChild(cardHeader);
             
-            var nameDiv = document.createElement('div');
-            nameDiv.className = 'name'
-            nameDiv.textContent = item.name
-            resultDiv.appendChild(nameDiv);
+            var cardTitle = document.createElement('div');
+            cardTitle.className = 'card-title h2';
+            cardTitle.textContent = item.callsign;
+            cardHeader.appendChild(cardTitle);
 
-            var cityDiv = document.createElement('div');
-            cityDiv.className = 'address'
-            cityDiv.textContent += item.city + ', ' + item.state + ' ' + item.zip
-            resultDiv.appendChild(cityDiv);
+            var cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+            cardBody.innerText = item.name + '\n' + item.city + ', ' + item.state + ' ' + item.zip;
+            card.appendChild(cardBody);
             
-            var serviceDiv = document.createElement('div');
-            serviceDiv.className = 'service'
-            serviceDiv.textContent += item.service
-            if(item.class){serviceDiv.textContent += ' ' + item.class}
-            if(item.prevcall){serviceDiv.textContent += ' ' + item.prevcall}
-            resultDiv.appendChild(serviceDiv);
+            var cardFooter = document.createElement('div');
+            cardFooter.className = 'card-footer';
+            cardFooter.textContent += item.service
+            if(item.class){cardFooter.textContent += ' ' + item.class}
+            if(item.prevcall){cardFooter.textContent += ' ' + item.prevcall}
+            card.appendChild(cardFooter);
           })
         }
       }
@@ -90,37 +93,39 @@ async function load() {
             divider.setAttribute('data-content','POSSIBLE MATCHES');
             results.appendChild(divider);
 
+            const columns = document.createElement('div')
+            columns.className = 'columns';
+            results.appendChild(columns);
+            
             possible_licenses.forEach(function(item : any){
-              var resultDiv = document.createElement('div');
-              resultDiv.className = 'hero-sm bg-gray'
-              results.appendChild(resultDiv);
+              var column = document.createElement('div');
+              column.className = 'column col-6 col-sm-12';
+              columns.appendChild(column);
               
-              // var divider = document.createElement('div')
-              // divider.className = "divider text-center"
-              // resultDiv.appendChild(divider)
-
-              var callSpan = document.createElement('span');
-              callSpan.className = 'h2'
-              callSpan.id = 'callsign'
-              callSpan.textContent = item.callsign
-              resultDiv.appendChild(callSpan);
+              var card = document.createElement('div');
+              card.className = 'card card-shadow';
+              column.appendChild(card);
+  
+              var cardHeader = document.createElement('div');
+              cardHeader.className = 'card-header';
+              card.appendChild(cardHeader);
               
-              var nameDiv = document.createElement('div');
-              nameDiv.className = 'name'
-              nameDiv.textContent = item.name
-              resultDiv.appendChild(nameDiv);
-
-              var cityDiv = document.createElement('div');
-              cityDiv.className = 'address'
-              cityDiv.textContent += item.city + ', ' + item.state + ' ' + item.zip
-              resultDiv.appendChild(cityDiv);
+              var cardTitle = document.createElement('div');
+              cardTitle.className = 'card-title h2';
+              cardTitle.textContent = item.callsign;
+              cardHeader.appendChild(cardTitle);
+  
+              var cardBody = document.createElement('div');
+              cardBody.className = 'card-body';
+              cardBody.innerText = item.name + '\n' + item.city + ', ' + item.state + ' ' + item.zip;
+              card.appendChild(cardBody);
               
-              var serviceDiv = document.createElement('div');
-              serviceDiv.className = 'service'
-              serviceDiv.textContent += item.service
-              if(item.class){serviceDiv.textContent += ' ' + item.class}
-              if(item.prevcall){serviceDiv.textContent += ' ' + item.prevcall}
-              resultDiv.appendChild(serviceDiv);
+              var cardFooter = document.createElement('div');
+              cardFooter.className = 'card-footer';
+              cardFooter.textContent += item.service
+              if(item.class){cardFooter.textContent += ' ' + item.class}
+              if(item.prevcall){cardFooter.textContent += ' ' + item.prevcall}
+              card.appendChild(cardFooter);
             })
           }
         }
