@@ -22,10 +22,11 @@ async function load() {
   const search_box = document.getElementById("call_search") as HTMLInputElement | null;
 
   var queryString = window.location.search;
-  console.log("qs-search:", queryString.search(/^\?[a-zA-Z0-9]{1,7}$/));
+  var queryStringCheck = queryString.search(/^\?[a-zA-Z0-9]{1,7}(\&.*)?$/);
+  console.log("qs-search:", queryStringCheck);
 
-  if(queryString.search(/^\?[a-zA-Z0-9]{1,7}$/) == 0){
-    var callsign = queryString.toUpperCase().replace("?","")
+  if(queryStringCheck == 0){
+    var callsign = queryString.toUpperCase().replace(/^\?([a-zA-Z0-9]{1,7})(\&.*)?$/g,"$1");
     console.log("Callsign:",callsign)
     if(search_box){search_box.value = callsign}
 
